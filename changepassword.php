@@ -4,6 +4,39 @@ include_once 'connectdb.php';
 session_start();
 include_once 'header.php';
 
+
+//when click on update password button we get out values from user into variables
+
+if(isset($_POST['btnupdate'])){
+
+  $oldpassword_txt = $_POST['txtoldpass'];
+  $newpassword_txt = $_POST['txtnewpass'];
+  $confpassword_txt = $_POST['txtconfpass'];
+
+  //echo $oldpassword_txt. "-" .$newpassword_txt. "-" .$confpassword_txt;
+
+
+  // using of select query we get out database record according to usermail
+
+          $email = $_SESSION['useremail'];
+
+    $select = $pdo->prepare("SELECT * FROM tbl_user WHERE useremail='$email'");
+
+    $select->execute();
+    $row = $select->fetch(PDO::FETCH_ASSOC);
+
+    echo $row['useremail'];
+    echo $row['username'];
+
+
+  //we compare userinput and database values
+
+  //if values matched then we run update query
+
+
+}
+
+
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -33,7 +66,7 @@ include_once 'header.php';
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form">
+            <form role="form" action="" method="post">
               <div class="box-body">
                 
                 <div class="form-group">
